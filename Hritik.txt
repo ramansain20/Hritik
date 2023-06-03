@@ -1,0 +1,102 @@
+[03/06, 18:07] Hritik iitism Jhansi: interface ListItem {
+  id: number;
+  name: string;
+  age: number;
+  // Add more properties here for each column
+}
+
+class DataList {
+  private list: ListItem[];
+
+  constructor() {
+    this.list = [];
+  }
+
+  public addItem(item: ListItem): void {
+    this.list.push(item);
+  }
+
+  public getList(): ListItem[] {
+    return this.list;
+  }
+}
+
+export default DataList;
+[03/06, 18:07] Hritik iitism Jhansi: import React from 'react';
+import Table from './Table';
+import DataList from './DataList';
+
+const App: React.FC = () => {
+  const dataList = new DataList();
+  dataList.addItem({ id: 1, name: 'John Doe', age: 25 });
+  dataList.addItem({ id: 2, name: 'Jane Smith', age: 30 });
+  // Add more items here using dataList.addItem()
+
+  return (
+    <div>
+      <h1>Table Example</h1>
+      <Table dataList={dataList.getList()} />
+    </div>
+  );
+};
+
+export default App;
+[03/06, 18:08] Hritik iitism Jhansi: import React from 'react';
+
+interface ListItem {
+  id: number;
+  name: string;
+  age: number;
+  // Add more properties here for each column
+}
+
+interface TableProps {
+  dataList: ListItem[];
+}
+
+const Table: React.FC<TableProps> = ({ dataList }) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          {/* Add more column headers here */}
+        </tr>
+      </thead>
+      <tbody>
+        {dataList.map(item => (
+          <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
+            <td>{item.age}</td>
+            {/* Render more columns here */}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default Table;
+[03/06, 18:08] Hritik iitism Jhansi: import React from 'react';
+import Table from './Table';
+import ListItem from './ListItem';
+
+const App: React.FC = () => {
+  const dataList: ListItem[] = [
+    { id: 1, name: 'John Doe', age: 25 },
+    { id: 2, name: 'Jane Smith', age: 30 },
+    // Add more items here
+  ];
+
+  return (
+    <div>
+      <h1>Table Example</h1>
+      <Table dataList={dataList} />
+    </div>
+  );
+};
+
+export default App;
